@@ -64,7 +64,7 @@ export default function MediaTimelineViewer() {
       {/* Timeline Section - Only show if files exist */}
       {files.length > 0 && (
         <div className="bg-card rounded-lg shadow-sm border p-6">
-          <h2 className="text-xl font-semibold mb-4">Timeline</h2>
+          <h2 className="text-xl font-semibold mb-2">Timeline</h2>
           <Timeline />
         </div>
       )}

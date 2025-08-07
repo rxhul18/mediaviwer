@@ -47,16 +47,15 @@ export default function Timeline() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between text-sm text-gray-500">
+      <div className="flex items-center justify-between text-sm text-primary">
         <span>Timeline Scale: {timelineScale}px = 1s</span>
         <span>{files.length} files</span>
       </div>
 
       <div className="relative">
         <div className="overflow-x-auto pb-4">
-          <div className="flex items-start gap-2 min-w-max p-4 bg-gray-50 rounded-lg">
+          <div className="flex items-start gap-2 min-w-max p-4 bg-card-foreground/75 rounded-lg">
             {files.map((file) => {
-              // Calculate block width based on trimmed duration
               const trimmedDuration = file.endTime - file.startTime
               const blockWidth = Math.max(trimmedDuration * timelineScale, 120)
               const isActive = file.id === activeFileId
@@ -64,9 +63,7 @@ export default function Timeline() {
               return (
                 <div
                   key={file.id}
-                  className={`relative group cursor-pointer transition-all duration-200 ${
-                    isActive ? "ring-2 ring-blue-500 ring-offset-2" : ""
-                  }`}
+                  className={`relative group cursor-pointer transition-all duration-200`}
                   style={{ width: `${blockWidth}px` }}
                   onClick={() => selectFile(file.id)}
                 >
@@ -88,13 +85,11 @@ export default function Timeline() {
                         </span>
                       </div>
                       
-                      {/* Delete button (shows on hover) */}
                       <button
-                        className="opacity-0 z-30 group-hover:opacity-100 p-1 hover:bg-red-100 rounded transition-all"
+                        className="opacity-0 z-30 group-hover:opacity-100 p-1 hover:bg-destructive-foreground rounded transition-all"
                         onClick={(e) => deleteFile(file.id, e)}
-                        aria-label={`Remove ${file.name}`}
                       >
-                        <Trash2 className="h-3 w-3 text-red-600" />
+                        <Trash2 className="size-3 text-destructive" />
                       </button>
                     </div>
 
@@ -111,19 +106,17 @@ export default function Timeline() {
 
                     {/* Video thumbnail background */}
                     {file.thumbnail && (
-                      <div className="absolute inset-0 rounded-lg overflow-hidden opacity-40">
+                      <div className="absolute inset-0 rounded-lg overflow-hidden opacity-70">
                         <img 
-                          src={file.thumbnail || "/placeholder.svg"} 
-                          alt="" 
+                          src={file.thumbnail} 
                           className="w-full h-full object-cover" 
                         />
                       </div>
                     )}
                   </div>
 
-                  {/* Trim indicator (yellow bar if file is trimmed) */}
                   {(file.startTime > 0 || file.endTime < file.duration) && (
-                    <div className="absolute -bottom-2 left-0 right-0 h-1 bg-yellow-400 rounded-full" />
+                    <div className="absolute -bottom-2 left-0 right-0 h-1 bg-primary rounded-full" />
                   )}
                 </div>
               )

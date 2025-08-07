@@ -84,7 +84,7 @@ export default function TrimControls({ file }) {
 
   if (!isTrimmable) {
     return (
-      <div className="bg-accent-foreground rounded-lg p-4">
+      <div className="bg-accent-foreground/30 rounded-lg p-4">
         <div className="flex items-center gap-2 text-gray-500">
           <Scissors className="h-5 w-5" />
           <span className="font-medium">Trimming not available</span>
