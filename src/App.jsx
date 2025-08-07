@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Provider } from "react-redux";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import MediaTimelineViewer from "@/components/MediaTimelineViewer";
+import { store } from "../store/store";
+import { ThemeProvider } from "./components/theme-provider";
+import { ModeToggle } from "./components/mode-toggle";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Provider store={store}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <div className="min-h-screen bg-[linear-gradient(to_right,#00000008_0.5px,transparent_1px),linear-gradient(to_bottom,#0000000a_0.5px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(to_right,#ffffff1a_0.5px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)]">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex justify-between items-center ml-[2.5%] w-[95%] mb-7 sticky top-5 bg-background/5 backdrop-blur-2xl border border-border z-10 rounded-lg p-4 shadow-md">
+              <h1 className="text-4xl font-bold text-primary">
+                Mini Media Timeline Viewer
+              </h1>
+              <div className="flex items-center gap-3">
+                <ModeToggle />
+                <Avatar className={"size-9 cursor-pointer"}>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </div>
+            </div>
+            <MediaTimelineViewer />
+          </div>
+        </div>
+      </ThemeProvider>
+    </Provider>
+  );
 }
-
-export default App
