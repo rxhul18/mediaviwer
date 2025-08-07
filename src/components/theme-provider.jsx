@@ -1,18 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-// type Theme = "dark" | "light" | "system"
-
-// type ThemeProviderProps = {
-//   children: React.ReactNode
-//   defaultTheme?: Theme
-//   storageKey?: string
-// }
-
-// type ThemeProviderState = {
-//   theme: Theme
-//   setTheme: (theme: Theme) => void
-// }
-
 const initialState = {
   theme: "system",
   setTheme: () => null,
@@ -63,6 +50,7 @@ export function ThemeProvider({
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext)
 

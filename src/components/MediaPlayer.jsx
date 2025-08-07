@@ -7,21 +7,16 @@ import { formatTime } from "../../utils/mediaUtils"
 export default function MediaPlayer({ file }) {
   const dispatch = useDispatch()
   
-  // Get player state from Redux
   const isPlaying = useSelector((state) => state.media.isPlaying)
   const currentTime = useSelector((state) => state.media.currentTime)
   
-  // Local state for volume controls
   const [volume, setVolume] = useState(1)
   const [isMuted, setIsMuted] = useState(false)
   
-  // Reference to the media element
-  const mediaRef = useRef(null)
-  
-  // Track if we're currently seeking to avoid feedback loops
+  const mediaRef = useRef(null)  
+
   const isSeekingRef = useRef(false)
 
-  // Sync media element with Redux playing state
   useEffect(() => {
     const media = mediaRef.current
     if (!media) return
@@ -33,15 +28,13 @@ export default function MediaPlayer({ file }) {
     }
   }, [isPlaying])
 
-  // Sync media element current time with Redux (only when seeking, not during playback)
   useEffect(() => {
     const media = mediaRef.current
     if (!media || isSeekingRef.current) return
 
-    // Only sync if there's a significant difference (indicating a seek operation)
     const timeDifference = Math.abs(media.currentTime - currentTime)
     if (timeDifference > 0.5) {
-      // Keep time within trim bounds
+
       const clampedTime = Math.max(file.startTime, Math.min(currentTime, file.endTime))
       media.currentTime = clampedTime
     }

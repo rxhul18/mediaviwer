@@ -6,11 +6,9 @@ import TrimControls from "./TrimControls";
 import { AnimateSvg } from "./custom/AnimateArrow";
 
 export default function MediaTimelineViewer() {
-  // Get data from Redux store
   const files = useSelector((state) => state.media.files);
   const activeFileId = useSelector((state) => state.media.activeFileId);
 
-  // Find the currently active file
   const activeFile = files.find((f) => f.id === activeFileId);
 
   return (
