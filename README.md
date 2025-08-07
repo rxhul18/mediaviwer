@@ -1,6 +1,6 @@
 # 🎬 Mini Media Editor
 
-A modern, browser-based **video, audio, and image editor** inspired by iMovie and Windows Movie Maker—reimagined for quick, intuitive clip editing in your web browser.
+A modern, browser-based **video, audio, and image editor**.
 
 # Screenshots
 <img width="1440" height="811" alt="image" src="https://github.com/user-attachments/assets/74a5168b-1303-48f8-8e04-00c2cd4ec12a" />
